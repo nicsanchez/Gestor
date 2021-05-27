@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block cuerpo %}
+
+    <!--- Slider --->
+    <h1>{{item.title}}</h1><hr>
+
+    <div>
+        {{ item.content | safe }}
+    </div>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/css/home_styles.css' %}">
+
+{% endblock %}

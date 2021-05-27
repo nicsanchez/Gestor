@@ -1,0 +1,94 @@
+%----------------
+%Tipo de solicitud
+%-----------------
+%Título del semillero
+\newcommand{\tHotbed}[1]{
+	\begin{minipage}[t]{0.45\textwidth}%
+		\cellcolor{\wcolorC}\textsc{\textbf{#1}}
+	\end{minipage}
+}
+
+%Cantidad de estudiantes en un semillero
+\newcommand{\nStudent}[1]{
+\begin{minipage}{0.45\textwidth}
+	\vspace{1mm}
+	\begin{flushright}
+		\begin{tabular}{ll}
+			\begin{minipage}[t]{\textwidth}%
+				\flushright
+				\textcolor{\wcolor}{\fontBigs\textbf{#1}}
+			\end{minipage}&
+			\begin{minipage}[t]{0.01\textwidth}%
+				\rotatebox{90}{\cellcolor{\wcolorC}{\textsc{\textbf{Total}}}}
+			\end{minipage}
+		\end{tabular}	
+	\end{flushright}
+\end{minipage}
+}
+
+%Gráficos
+\newcommand{\fPie}[3]{
+	\ADD{#1}{#2}{\tsuma}
+	\DIVIDE{#1}{\tsuma}{\tsumaU}
+	\MULTIPLY{100}{\tsumaU}{\tsumaU}
+	\DIVIDE{#2}{\tsuma}{\tsumaG}
+	\MULTIPLY{100}{\tsumaG}{\tsumaG}
+	\INTEGERPART{\tsumaU}{\tsumaU}
+	\INTEGERPART{\tsumaG}{\tsumaG}
+
+	%Chambonada pq no se como poner varias condiociones (no entiendo el paquete :|)
+	%Es para que se aproxime y el % siempre sume 100
+	\ADD{\tsumaG}{1}{\tsumaG}
+	
+	\ifnumequal{\tsumaG}{1}
+	{\MULTIPLY{0}{\tsumaG}{\tsumaG}}
+	{}
+	
+	\ifnumequal{\tsumaG}{101}
+	{\MULTIPLY{1}{100}{\tsumaG}}
+	{}
+	
+	\ifnumequal{\tsumaG}{51}
+	{\MULTIPLY{1}{50}{\tsumaU}\MULTIPLY{1}{50}{\tsumaG}}
+	{}
+
+	\ADD{\tsumaG}{\tsumaU}{\tsumaV}
+	
+	\ifnumequal{\tsumaV}{0}
+	{	\\No hay estudiantes registrados en el semillero.}
+	{
+		\vspace{1mm}
+		\centering
+		\resizebox{#3\textwidth}{!}{
+			\begin{tikzpicture}[fill opacity=0.7, text opacity=1]
+			\tikzset{lines/.style={draw=white,ultra thick}}
+			\pie[text=legend,style={lines},color={\wcolortsc,\wcolorttc}]
+			{\tsumaU/#1 de Pregrado , \tsumaG/#2 de Posgrado}
+			\end{tikzpicture}
+		}
+	}
+}
+
+%Dos por fila
+\newcommand{\fPieRow}[6]{
+	\ADD{#3}{#4}{\tsumaHA}
+	\ADD{#5}{#6}{\tsumaHB}
+	\noindent
+	\ifthenelse{\tsumaHB > 0}
+	{
+		\begin{tabular}{ll}
+			\tHotbed{#1} & \tHotbed{#2}\\
+			\nStudent{\tsumaHA} &\nStudent{\tsumaHB}\\
+			\fPie{#3}{#4}{0.473} & \fPie{#5}{#6}{0.473}
+		\end{tabular}
+	}
+	{
+	\begin{center}
+		\begin{tabular}{l}
+			\tHotbed{#1}\\
+			\nStudent{\tsumaHA}\\
+			\fPie{#3}{#4}{0.473}
+		\end{tabular}
+	\end{center}
+	}
+}

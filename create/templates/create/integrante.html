@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% load auth_extras %}
+
+{% block cuerpo %}
+
+    <h1>Datos del integrante</h1>
+    <a class="config" title="Volver" alt="Volver" id="delete" href="{% url 'register' %}"><i class="fas fa-reply"></i></a>
+    <a class="config" title="Editar" alt="Editar" id="editar" href="{% url 'integrante_edit' id=integrante.id %}"><i class="fas fa-pencil-alt"></i></a>
+    <hr>
+    <br>
+    <div class="container">
+        <div class="row" >
+            <p>Nombres</p>  
+            <br>
+            {{integrante.name}} {{integrante.lastname}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Documento</p>
+            <br>
+            {{integrante.document}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Correo</p>
+            <br>
+            {{integrante.email}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Telefono</p>
+            <br>
+            {{integrante.phone}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Informacion Adicional</p>
+            <br>
+            {{integrante.aditional}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Fecha de ingreso</p>
+            <br>
+            {{participante.joined}}
+        </div>
+        <br>
+        <div class="row" >
+            <p>Rol</p>
+            <br>
+            {{participante.rol}}
+        </div>
+        <br>
+        {% if linea_coordinador %}
+            <div class="row" >
+                <p>Linea de investigacion</p>
+                <br>
+                {% for linea in linea_coordinador %}
+                    <ul>
+                        <li>{{linea.id_linea.name}}</li>
+                    </ul>
+                {% endfor %}        
+            </div>
+            <br>
+        {% endif %}
+        {% if atributo %}
+            <div class="row" >
+                <p>Programa</p>
+                <br>
+                {{atributo.id_programa.name}}
+            </div>
+            <br>
+            <div class="row" >
+                <p>Tipo de programa</p>
+                <br>
+                {{atributo.id_programa.tipo}}
+            </div>
+            <br>
+            <div class="row" >
+                <p>Nivel</p>
+                <br>
+                {{atributo.nivel}}
+            </div>
+        {% endif %}
+        {% if atributo_otra %}
+            <div class="row" >
+                <p>Tipo de programa</p>
+                <br>
+                {% if atributo_otra.tipo == '1' %}
+                    Pregrado
+                {% elif atributo_otra.tipo == '2' %}
+                    Postgrado
+                {% endif %}
+            </div>
+        {% endif %}
+        <br>
+    </div>
+    {% load static %}
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'create/css/details_style.css' %}">
+
+{% endblock %}

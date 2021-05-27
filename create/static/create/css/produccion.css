@@ -1,0 +1,43 @@
+#produccion {
+    color: #000;
+    background: #fff;
+}
+h1 {
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+}
+#textSearch {
+	width: auto;
+	float: right;
+	font-size: 12pt;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, tr, th, td {
+    text-align: center;
+    border: 2px solid black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 10pt;
+    padding: 10px;
+}
+
+table a, #file {
+    text-decoration: none;
+    font-weight: bold;
+    color: #01602D;
+}
+
+#file{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+}
+
+div table input {
+    border: 0;
+    appearance: none;
+}

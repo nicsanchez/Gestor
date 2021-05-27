@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block cuerpo %}
+
+    <!--- Slider --->
+    <h1>Añadir noticia</h1><a href="">Editar</a>
+    <hr><br>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="campos">
+            <label for="title">Título:</label>
+            <input type="text" name="title" id="title">
+            <label for="image">Imagen:</label>
+            <input type="file" name="image" id="image">
+            <label for="banner">Banner:</label>
+            <input type="file" name="banner" id="banner">
+            <label for="description">Descripción:</label>
+            <textarea name="description" cols="30" rows="10"></textarea>
+            <label for="content">Contenido:</label>
+            <textarea name="content" id="textEditor" cols="30" rows="10"></textarea>
+        </div>
+        <br>
+        <input type="submit" value="Enviar"/>
+    </form>
+
+    {% load static %}
+	<<script type="text/javascript">
+		tinymce.init({
+      		selector: '#textEditor',
+			toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image pageembed",
+  			plugins: "image imagetools code pageembed",
+			width: 900,
+			height: 600
+    	});
+	</script>
+    <link rel="stylesheet" href="{% static 'create/css/create_styles.css' %}">
+
+{% endblock %}
